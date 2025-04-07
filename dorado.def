@@ -1,0 +1,16 @@
+Bootstrap: docker
+From: ubuntu:24.04
+
+%post
+LANG=C.UTF-8
+LC_ALL=C.UTF-8
+
+apt-get update && apt-get install curl nvidia-cuda-dev  nvidia-cuda-toolkit -y && rm -rf /var/lib/apt/lists/*
+
+curl "https://cdn.oxfordnanoportal.com/software/analysis/dorado-0.9.5-linux-x64.tar.gz" -o dorado-0.9.5-linux-x64.tar.gz
+tar -xzf dorado-0.9.5-linux-x64.tar.gz
+
+%environment
+PATH=dorado-0.9.5-linux-x64/bin/:$PATH
+export LC_ALL=C.UTF-8
+export LANG=C.UTF-8
